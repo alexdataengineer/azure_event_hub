@@ -1,97 +1,97 @@
-# Azure Event Hub - Projeto de Exemplo
+# Azure Event Hub - Sample Project
 
-Este projeto demonstra como enviar e receber eventos no Azure Event Hub usando Python.
+This project demonstrates how to send and receive events in Azure Event Hub using Python.
 
-## 📋 Pré-requisitos
+## 📋 Prerequisites
 
 - Python 3.7+
-- Azure Event Hub configurado (namespace: `datateam2`)
-- Connection string do Event Hub ou credenciais do Azure Identity
+- Azure Event Hub configured (namespace: `datateam2`)
+- Event Hub connection string or Azure Identity credentials
 
-## 🚀 Configuração
+## 🚀 Setup
 
-### 1. Instalar dependências
+### 1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configurar variáveis de ambiente
+### 2. Configure environment variables
 
-Crie um arquivo `.env` baseado no `config.example`:
+Create a `.env` file based on `config.example`:
 
 ```bash
 cp config.example .env
 ```
 
-Edite o arquivo `.env` com suas configurações:
+Edit the `.env` file with your configurations:
 
 ```env
-# Opção 1: Usar Connection String (mais simples para testes)
+# Option 1: Use Connection String (simpler for testing)
 EVENT_HUB_CONNECTION_STRING=your_event_hub_connection_string_here
 EVENT_HUB_NAME=your_event_hub_name_here
 
-# Opção 2: Usar Azure Identity (recomendado para produção)
+# Option 2: Use Azure Identity (recommended for production)
 # AZURE_TENANT_ID=your_tenant_id
 # AZURE_CLIENT_ID=your_client_id
 # AZURE_CLIENT_SECRET=your_client_secret
 # EVENT_HUB_NAMESPACE=datateam2
 ```
 
-### 3. Obter Connection String
+### 3. Get Connection String
 
-1. Acesse o [Portal do Azure](https://portal.azure.com)
-2. Vá para seu Event Hub (`datateam2`)
-3. Clique em "Shared access policies"
-4. Selecione "RootManageSharedAccessKey"
-5. Copie a "Connection string-primary key"
+1. Access the [Azure Portal](https://portal.azure.com)
+2. Go to your Event Hub (`datateam2`)
+3. Click on "Shared access policies"
+4. Select "RootManageSharedAccessKey"
+5. Copy the "Connection string-primary key"
 
-## 📤 Enviando Eventos
+## 📤 Sending Events
 
-### Teste Rápido
+### Quick Test
 
 ```bash
 python quick_test.py
 ```
 
-### Script Completo
+### Complete Script
 
 ```bash
 python send_events.py
 ```
 
-Opções disponíveis:
-- **1**: Enviar lote de eventos
-- **2**: Enviar eventos continuamente
-- **3**: Enviar evento único
+Available options:
+- **1**: Send batch of events
+- **2**: Send events continuously
+- **3**: Send single event
 
-## 📥 Recebendo Eventos
+## 📥 Receiving Events
 
 ```bash
 python receive_events.py
 ```
 
-Este script irá:
-- Conectar ao Event Hub
-- Escutar eventos em tempo real
-- Exibir detalhes de cada evento recebido
-- Usar checkpoint para marcar eventos como processados
+This script will:
+- Connect to Event Hub
+- Listen to events in real-time
+- Display details of each received event
+- Use checkpoint to mark events as processed
 
-## 🔧 Estrutura do Projeto
+## 🔧 Project Structure
 
 ```
 azure_event_hub/
-├── requirements.txt          # Dependências Python
-├── config.example           # Exemplo de configuração
-├── send_events.py          # Script completo para envio
-├── quick_test.py           # Teste rápido
-├── receive_events.py       # Consumo de eventos
-└── README.md              # Este arquivo
+├── requirements.txt          # Python dependencies
+├── config.example           # Configuration example
+├── send_events.py          # Complete sending script
+├── quick_test.py           # Quick test
+├── receive_events.py       # Event consumption
+└── README.md              # This file
 ```
 
-## 📊 Formato dos Eventos
+## 📊 Event Format
 
-Os eventos enviados seguem este formato JSON:
+Events sent follow this JSON format:
 
 ```json
 {
@@ -114,56 +114,56 @@ Os eventos enviados seguem este formato JSON:
 }
 ```
 
-## 🎯 Casos de Uso
+## 🎯 Use Cases
 
-### 1. Teste e Desenvolvimento
-- Use `quick_test.py` para testes rápidos
-- Use `send_events.py` para simular carga
+### 1. Testing and Development
+- Use `quick_test.py` for quick tests
+- Use `send_events.py` to simulate load
 
-### 2. Monitoramento
-- Use `receive_events.py` para monitorar eventos em tempo real
-- Verifique o Data Explorer no Portal do Azure
+### 2. Monitoring
+- Use `receive_events.py` to monitor events in real-time
+- Check the Data Explorer in Azure Portal
 
-### 3. Produção
-- Configure Azure Identity para autenticação segura
-- Use consumer groups para processamento paralelo
-- Implemente retry logic e error handling
+### 3. Production
+- Configure Azure Identity for secure authentication
+- Use consumer groups for parallel processing
+- Implement retry logic and error handling
 
-## 🔍 Verificando Eventos no Portal
+## 🔍 Checking Events in Portal
 
-1. Acesse o [Portal do Azure](https://portal.azure.com)
-2. Vá para seu Event Hub (`datateam2`)
-3. Clique em "Data Explorer"
-4. Visualize eventos em tempo real ou históricos
+1. Access the [Azure Portal](https://portal.azure.com)
+2. Go to your Event Hub (`datateam2`)
+3. Click on "Data Explorer"
+4. View real-time or historical events
 
 ## 🛠️ Troubleshooting
 
-### Erro de Conexão
-- Verifique se a connection string está correta
-- Confirme se o Event Hub está ativo
-- Verifique as permissões da policy
+### Connection Error
+- Check if the connection string is correct
+- Confirm if the Event Hub is active
+- Check policy permissions
 
-### Erro de Autenticação
-- Para Azure Identity: configure as variáveis de ambiente
-- Para Connection String: verifique se não expirou
+### Authentication Error
+- For Azure Identity: configure environment variables
+- For Connection String: check if it hasn't expired
 
-### Eventos não aparecem
-- Verifique se está usando o consumer group correto
-- Confirme se há eventos sendo enviados
-- Use o Data Explorer para verificar
+### Events not appearing
+- Check if you're using the correct consumer group
+- Confirm if there are events being sent
+- Use Data Explorer to verify
 
-## 📚 Recursos Adicionais
+## 📚 Additional Resources
 
-- [Documentação Azure Event Hub](https://docs.microsoft.com/en-us/azure/event-hubs/)
-- [SDK Python Azure Event Hub](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send)
+- [Azure Event Hub Documentation](https://docs.microsoft.com/en-us/azure/event-hubs/)
+- [Python SDK Azure Event Hub](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send)
 - [Azure Event Hub Data Explorer](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-explorer)
 
-## 👤 Autor
+## 👤 Author
 
-Este projeto foi idealizado, desenvolvido e documentado por mim, **Alexsander Silveira**.
+This project was conceived, developed and documented by me, **Alexsander Silveira**.
 
-Sou entusiasta de dados, automação e soluções em nuvem, e criei este repositório para facilitar a integração, testes e monitoramento de eventos no Azure Event Hub, tanto para aprendizado quanto para uso profissional.
+I'm passionate about data, automation and cloud solutions, and I created this repository to facilitate integration, testing and monitoring of events in Azure Event Hub, both for learning and professional use.
 
-Se você tiver dúvidas, sugestões ou quiser colaborar, fique à vontade para abrir uma issue ou entrar em contato!
+If you have questions, suggestions or want to collaborate, feel free to open an issue or get in touch!
 
 ---
