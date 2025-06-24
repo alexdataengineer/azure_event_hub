@@ -157,3 +157,13 @@ Os eventos enviados seguem este formato JSON:
 - [Documentação Azure Event Hub](https://docs.microsoft.com/en-us/azure/event-hubs/)
 - [SDK Python Azure Event Hub](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-python-get-started-send)
 - [Azure Event Hub Data Explorer](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-explorer)
+
+## 👤 Autor
+
+Este projeto foi idealizado, desenvolvido e documentado por mim, **Alexsander Silveira**.
+
+Sou entusiasta de dados, automação e soluções em nuvem, e criei este repositório para facilitar a integração, testes e monitoramento de eventos no Azure Event Hub, tanto para aprendizado quanto para uso profissional.
+
+Se você tiver dúvidas, sugestões ou quiser colaborar, fique à vontade para abrir uma issue ou entrar em contato!
+
+---
