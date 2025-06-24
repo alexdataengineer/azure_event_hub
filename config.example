@@ -1,0 +1,9 @@
+# Azure Event Hub Configuration
+EVENT_HUB_CONNECTION_STRING=your_event_hub_connection_string_here
+EVENT_HUB_NAME=your_event_hub_name_here
+
+# Alternative: Use Azure Identity (recommended for production)
+# AZURE_TENANT_ID=your_tenant_id
+# AZURE_CLIENT_ID=your_client_id
+# AZURE_CLIENT_SECRET=your_client_secret
+# EVENT_HUB_NAMESPACE=datateam2 
