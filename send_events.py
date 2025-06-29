@@ -27,7 +27,7 @@ class EventHubSender:
         self.namespace = os.getenv("EVENT_HUB_NAMESPACE", "datateam2")
         
         if not self.connection_string:
-            print("⚠️  Connection string não encontrada. Usando Azure Identity...")
+            print("Connection string não encontrada. Usando Azure Identity...")
             self.use_managed_identity = True
         else:
             self.use_managed_identity = False
@@ -78,10 +78,10 @@ class EventHubSender:
                 event_data_batch.add(event)
                 await producer.send_batch(event_data_batch)
                 
-            print(f"✅ Evento enviado: {event_data['event_id']} - {event_data['event_type']}")
+            print(f"Evento enviado: {event_data['event_id']} - {event_data['event_type']}")
             
         except Exception as e:
-            print(f"❌ Erro ao enviar evento: {e}")
+            print(f"Erro ao enviar evento: {e}")
 
     async def send_batch_events(self, num_events: int = 10, delay: float = 1.0):
         """Envia múltiplos eventos em lote"""
@@ -100,7 +100,7 @@ class EventHubSender:
                 eventhub_name=self.event_hub_name
             )
 
-        print(f"🚀 Iniciando envio de {num_events} eventos...")
+        print(f"Iniciando envio de {num_events} eventos...")
         
         for i in range(num_events):
             event_data = self.generate_sample_data()
@@ -109,7 +109,7 @@ class EventHubSender:
             if i < num_events - 1:  # Não aguarda após o último evento
                 await asyncio.sleep(delay)
         
-        print(f"🎉 Envio concluído! {num_events} eventos enviados.")
+        print(f"Envio concluído! {num_events} eventos enviados.")
 
     async def send_continuous_events(self, interval: float = 5.0):
         """Envia eventos continuamente em intervalos regulares"""
@@ -126,7 +126,7 @@ class EventHubSender:
                 eventhub_name=self.event_hub_name
             )
 
-        print(f"🔄 Iniciando envio contínuo de eventos (intervalo: {interval}s)")
+        print(f"Iniciando envio contínuo de eventos (intervalo: {interval}s)")
         print("Pressione Ctrl+C para parar...")
         
         try:
@@ -136,18 +136,18 @@ class EventHubSender:
                 await asyncio.sleep(interval)
                 
         except KeyboardInterrupt:
-            print("\n⏹️  Envio contínuo interrompido pelo usuário.")
+            print("\nEnvio contínuo interrompido pelo usuário.")
 
 async def main():
     """Função principal"""
     sender = EventHubSender()
     
-    print("📊 Azure Event Hub - Enviador de Eventos")
+    print("Azure Event Hub - Enviador de Eventos")
     print("=" * 50)
     
     # Verifica configuração
     if not sender.connection_string and not sender.use_managed_identity:
-        print("❌ Configuração não encontrada!")
+        print("Configuração não encontrada!")
         print("Por favor, configure as variáveis de ambiente:")
         print("1. EVENT_HUB_CONNECTION_STRING - ou")
         print("2. Use Azure Identity com as variáveis apropriadas")
@@ -174,12 +174,12 @@ async def main():
             await sender.send_batch_events(1)
             
         else:
-            print("❌ Opção inválida!")
+            print("Opção inválida!")
             
     except ValueError:
-        print("❌ Valor inválido!")
+        print("Valor inválido!")
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f"Erro: {e}")
 
 if __name__ == "__main__":
     asyncio.run(main()) 

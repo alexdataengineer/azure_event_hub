@@ -66,7 +66,7 @@ class EventHubDataExplorer:
             # Marca como processado
             await partition_context.update_checkpoint(event)
         
-        print(f"🔍 Coletando eventos por {duration_seconds} segundos...")
+        print(f"Coletando eventos por {duration_seconds} segundos...")
         
         try:
             async with consumer:
@@ -98,31 +98,31 @@ class EventHubDataExplorer:
     def display_summary(self):
         """Exibe um resumo dos eventos coletados"""
         print("\n" + "="*60)
-        print("📊 RESUMO DOS EVENTOS COLETADOS")
+        print("RESUMO DOS EVENTOS COLETADOS")
         print("="*60)
         
         duration = self.stats["end_time"] - self.stats["start_time"]
-        print(f"⏱️  Período: {self.stats['start_time']} até {self.stats['end_time']}")
-        print(f"⏱️  Duração: {duration}")
-        print(f"📈 Total de eventos: {self.stats['total_events']}")
+        print(f"Período: {self.stats['start_time']} até {self.stats['end_time']}")
+        print(f"Duração: {duration}")
+        print(f"Total de eventos: {self.stats['total_events']}")
         
         if self.stats['total_events'] > 0:
             events_per_second = self.stats['total_events'] / duration.total_seconds()
-            print(f"🚀 Taxa: {events_per_second:.2f} eventos/segundo")
+            print(f"Taxa: {events_per_second:.2f} eventos/segundo")
         
-        print("\n📋 Eventos por tipo:")
+        print("\nEventos por tipo:")
         for event_type, count in self.stats["events_by_type"].items():
             percentage = (count / self.stats["total_events"]) * 100
             print(f"   {event_type}: {count} ({percentage:.1f}%)")
         
-        print("\n🔢 Eventos por partição:")
+        print("\nEventos por partição:")
         for partition_id, count in sorted(self.stats["events_by_partition"].items()):
             percentage = (count / self.stats["total_events"]) * 100
             print(f"   Partição {partition_id}: {count} ({percentage:.1f}%)")
 
     def display_recent_events(self, limit: int = 10):
         """Exibe os eventos mais recentes"""
-        print(f"\n📄 ÚLTIMOS {limit} EVENTOS:")
+        print(f"\nÚLTIMOS {limit} EVENTOS:")
         print("-" * 60)
         
         recent_events = self.events_buffer[-limit:] if len(self.events_buffer) > limit else self.events_buffer
@@ -160,17 +160,17 @@ class EventHubDataExplorer:
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(export_data, f, indent=2, ensure_ascii=False, default=str)
         
-        print(f"💾 Eventos exportados para: {filename}")
+        print(f"Eventos exportados para: {filename}")
 
 async def main():
     """Função principal"""
     explorer = EventHubDataExplorer()
     
     if not explorer.connection_string or not explorer.event_hub_name:
-        print("❌ Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
+        print("Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
         return
     
-    print("🔍 Azure Event Hub - Data Explorer Demo")
+    print("Azure Event Hub - Data Explorer Demo")
     print("=" * 50)
     
     try:
@@ -187,10 +187,10 @@ async def main():
         explorer.export_to_json()
         
     except KeyboardInterrupt:
-        print("\n⏹️  Coleta interrompida pelo usuário.")
+        print("\nColeta interrompida pelo usuário.")
         explorer.display_summary()
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f"Erro: {e}")
 
 if __name__ == "__main__":
     asyncio.run(main()) 

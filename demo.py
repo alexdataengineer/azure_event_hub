@@ -21,13 +21,13 @@ class EventHubDemo:
         self.event_hub_name = os.getenv("EVENT_HUB_NAME")
         
         if not self.connection_string or not self.event_hub_name:
-            print("❌ Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
-            print("💡 Copie o config.example para .env e configure suas credenciais")
+            print("Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
+            print("Copie o config.example para .env e configure suas credenciais")
             return
 
     async def send_demo_events(self):
         """Envia alguns eventos de demonstração"""
-        print("🚀 Enviando eventos de demonstração...")
+        print("Enviando eventos de demonstração...")
         
         producer = EventHubProducerClient.from_connection_string(
             conn_str=self.connection_string,
@@ -75,15 +75,15 @@ class EventHubDemo:
                     event_data_batch.add(event)
                     await producer.send_batch(event_data_batch)
                     
-                    print(f"✅ Evento {i} enviado: {event_data['event_type']}")
+                    print(f"Evento {i} enviado: {event_data['event_type']}")
                     await asyncio.sleep(0.5)  # Pequena pausa entre eventos
                     
         except Exception as e:
-            print(f"❌ Erro ao enviar eventos: {e}")
+            print(f"Erro ao enviar eventos: {e}")
 
     async def receive_demo_events(self, timeout_seconds=10):
         """Recebe eventos por um tempo limitado"""
-        print(f"🎧 Recebendo eventos por {timeout_seconds} segundos...")
+        print(f"Recebendo eventos por {timeout_seconds} segundos...")
         
         consumer = EventHubConsumerClient.from_connection_string(
             conn_str=self.connection_string,
@@ -103,11 +103,11 @@ class EventHubDemo:
                     "body": event_body
                 })
                 
-                print(f"📥 Evento recebido: {event_body.get('event_type', 'unknown')}")
+                print(f"Evento recebido: {event_body.get('event_type', 'unknown')}")
                 await partition_context.update_checkpoint(event)
                 
             except Exception as e:
-                print(f"❌ Erro ao processar evento: {e}")
+                print(f"Erro ao processar evento: {e}")
         
         try:
             # Agenda o fim da recepção
@@ -131,7 +131,7 @@ class EventHubDemo:
 
     def show_event_hub_info(self):
         """Mostra informações sobre o Event Hub"""
-        print("📊 Informações do Azure Event Hub")
+        print("Informações do Azure Event Hub")
         print("=" * 40)
         print(f"Namespace: datateam2")
         print(f"Event Hub: {self.event_hub_name}")
@@ -148,13 +148,13 @@ async def main():
     if not demo.connection_string or not demo.event_hub_name:
         return
     
-    print("🎯 Azure Event Hub - Demonstração Completa")
+    print("Azure Event Hub - Demonstração Completa")
     print("=" * 50)
     
     # Mostra informações do Event Hub
     demo.show_event_hub_info()
     
-    print("📋 Esta demonstração irá:")
+    print("Esta demonstração irá:")
     print("1. Enviar 3 eventos de exemplo")
     print("2. Receber eventos por 10 segundos")
     print("3. Mostrar um resumo dos eventos")
@@ -169,7 +169,7 @@ async def main():
         print()
         
         # Aguarda um pouco para os eventos chegarem
-        print("⏳ Aguardando 2 segundos para os eventos chegarem...")
+        print("Aguardando 2 segundos para os eventos chegarem...")
         await asyncio.sleep(2)
         print()
         
@@ -178,18 +178,18 @@ async def main():
         
         # Mostra resumo
         print("\n" + "="*50)
-        print("📊 RESUMO DA DEMONSTRAÇÃO")
+        print("RESUMO DA DEMONSTRAÇÃO")
         print("="*50)
-        print(f"✅ Eventos enviados: 3")
-        print(f"📥 Eventos recebidos: {len(events)}")
+        print(f"Eventos enviados: 3")
+        print(f"Eventos recebidos: {len(events)}")
         
         if events:
-            print("\n📄 Eventos recebidos:")
+            print("\nEventos recebidos:")
             for i, event in enumerate(events, 1):
                 print(f"  {i}. {event['body'].get('event_type', 'unknown')} - {event['body'].get('message', '')}")
         
-        print("\n🎉 Demonstração concluída!")
-        print("\n💡 Próximos passos:")
+        print("\nDemonstração concluída!")
+        print("\nPróximos passos:")
         print("   - Configure suas credenciais no arquivo .env")
         print("   - Use send_events.py para enviar mais eventos")
         print("   - Use receive_events.py para monitorar eventos")
@@ -197,9 +197,9 @@ async def main():
         print("   - Acesse o Data Explorer no Portal do Azure")
         
     except KeyboardInterrupt:
-        print("\n⏹️  Demonstração interrompida pelo usuário.")
+        print("\nDemonstração interrompida pelo usuário.")
     except Exception as e:
-        print(f"❌ Erro na demonstração: {e}")
+        print(f"Erro na demonstração: {e}")
 
 if __name__ == "__main__":
     asyncio.run(main()) 

@@ -14,7 +14,7 @@ load_dotenv()
 
 async def on_event(partition_context, event):
     """Callback executado quando um evento é recebido"""
-    print(f"📥 Evento recebido da partição {partition_context.partition_id}")
+    print(f"Evento recebido da partição {partition_context.partition_id}")
     print(f"   Offset: {event.offset}")
     print(f"   Sequence Number: {event.sequence_number}")
     print(f"   Enqueued Time: {event.enqueued_time}")
@@ -35,15 +35,15 @@ async def on_event(partition_context, event):
 
 async def on_partition_initialize(partition_context):
     """Callback executado quando uma partição é inicializada"""
-    print(f"🔄 Inicializando partição {partition_context.partition_id}")
+    print(f"Inicializando partição {partition_context.partition_id}")
 
 async def on_partition_close(partition_context, reason):
     """Callback executado quando uma partição é fechada"""
-    print(f"🔒 Fechando partição {partition_context.partition_id}, razão: {reason}")
+    print(f"Fechando partição {partition_context.partition_id}, razão: {reason}")
 
 async def on_error(partition_context, error):
     """Callback executado quando ocorre um erro"""
-    print(f"❌ Erro na partição {partition_context.partition_id}: {error}")
+    print(f"Erro na partição {partition_context.partition_id}: {error}")
 
 async def receive_events():
     """Função principal para receber eventos"""
@@ -54,7 +54,7 @@ async def receive_events():
     consumer_group = os.getenv("CONSUMER_GROUP", "$Default")
     
     if not connection_string or not event_hub_name:
-        print("❌ Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
+        print("Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
         return
     
     # Cria o consumer client
@@ -64,8 +64,8 @@ async def receive_events():
         eventhub_name=event_hub_name
     )
     
-    print(f"🎧 Iniciando consumo de eventos do Event Hub: {event_hub_name}")
-    print(f"👥 Consumer Group: {consumer_group}")
+    print(f"Iniciando consumo de eventos do Event Hub: {event_hub_name}")
+    print(f"Consumer Group: {consumer_group}")
     print("Pressione Ctrl+C para parar...")
     print("=" * 60)
     
@@ -81,9 +81,9 @@ async def receive_events():
                 track_last_enqueued_event_properties=True
             )
     except KeyboardInterrupt:
-        print("\n⏹️  Consumo interrompido pelo usuário.")
+        print("\nConsumo interrompido pelo usuário.")
     except Exception as e:
-        print(f"❌ Erro: {e}")
+        print(f"Erro: {e}")
 
 if __name__ == "__main__":
     asyncio.run(receive_events()) 

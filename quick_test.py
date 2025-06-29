@@ -21,7 +21,7 @@ async def send_test_event():
     event_hub_name = os.getenv("EVENT_HUB_NAME")
     
     if not connection_string or not event_hub_name:
-        print("❌ Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
+        print("Configure EVENT_HUB_CONNECTION_STRING e EVENT_HUB_NAME no arquivo .env")
         return
     
     # Dados do evento
@@ -53,11 +53,11 @@ async def send_test_event():
             event_data_batch.add(event)
             await producer.send_batch(event_data_batch)
         
-        print("✅ Evento de teste enviado com sucesso!")
-        print(f"📄 Dados enviados: {json.dumps(event_data, indent=2)}")
+        print("Evento de teste enviado com sucesso!")
+        print(f"Dados enviados: {json.dumps(event_data, indent=2)}")
         
     except Exception as e:
-        print(f"❌ Erro ao enviar evento: {e}")
+        print(f"Erro ao enviar evento: {e}")
 
 if __name__ == "__main__":
     asyncio.run(send_test_event()) 
